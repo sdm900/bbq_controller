@@ -8,9 +8,10 @@ Hardware
 * Tower Pro micro servo 99 SG90
 
 ## References
-https://github.com/rm-hull/luma.oled
-https://github.com/pimoroni/mcp9600-python
-https://github.com/sarfata/pi-blaster.git
-https://github.com/d2r2/go-i2c
-https://www.dafont.com/liberation-sans.font
-https://www.dafont.com/pixelmix.font
+* https://github.com/rm-hull/luma.oled
+* https://github.com/pimoroni/mcp9600-python
+* https://github.com/sarfata/pi-blaster.git
+* https://github.com/d2r2/go-i2c
+* https://www.dafont.com/liberation-sans.font
+* https://www.dafont.com/pixelmix.font
+* https://www.displayfuture.com/Display/datasheet/controller/SH1107.pdf
