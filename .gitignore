@@ -1,4 +1,5 @@
 bin/
 pkg/
+ext/
 src/github.com/
 src/golang.org/
