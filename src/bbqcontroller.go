@@ -68,7 +68,7 @@ func main() {
 
 		b.ServoDuty(duty)
 		b.Text(sett, pt, ptmm, b.AmbientT(), duty)
-		time.Sleep(1 * time.Second)
+		time.Sleep(1531 * time.Millisecond)
 	}
 
 	time.Sleep(5 * time.Second)
