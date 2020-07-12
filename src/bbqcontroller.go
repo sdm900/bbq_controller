@@ -3,6 +3,7 @@ package main
 import (
 	"bbq"
 	"filter"
+	"math/rand"
 	"oled"
 	"outputs"
 	"pwm"
@@ -68,7 +69,7 @@ func main() {
 
 		b.ServoDuty(duty)
 		b.Text(sett, pt, ptmm, b.AmbientT(), duty)
-		time.Sleep(1531 * time.Millisecond)
+		time.Sleep(time.Duration(1000+rand.Int63n(1000)) * time.Millisecond)
 	}
 
 	time.Sleep(5 * time.Second)
