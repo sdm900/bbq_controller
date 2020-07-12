@@ -50,7 +50,7 @@ func main() {
 
 	var duty float32
 	duty = 50
-	mm := filter.NewMM(300, 70)
+	mm := filter.NewMM(200, 70)
 
 	// Going to assume that a duty of 0 is closed and 100 is open
 
