@@ -57,6 +57,15 @@ func main() {
 
 	// Going to assume that a duty of 0 is closed and 100 is open
 
+	for i := 0; i <= 100; i++ {
+		b.ServoDuty(float32(i))
+		time.Sleep(30 * time.Millisecond)
+	}
+	for i := 100; i >= 0; i-- {
+		b.ServoDuty(float32(i))
+		time.Sleep(30 * time.Millisecond)
+	}
+
 	for i := 0; ; i++ {
 		pt := b.ProbeT()
 		ptmm := mm.Add(pt)
