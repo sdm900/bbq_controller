@@ -52,11 +52,16 @@ func main() {
 	duty = 50
 	mm := filter.NewMM(200, 70)
 
+	mm1 := filter.NewMM(10, 60)
+	mm2 := filter.NewMM(10, 60)
+
 	// Going to assume that a duty of 0 is closed and 100 is open
 
 	for i := 0; ; i++ {
 		pt := b.ProbeT()
 		ptmm := mm.Add(pt)
+		disppt := mm1.Add(pt)
+		dispat := mm2.Add(b.AmbientT())
 		sett := b.GetT()
 
 		if ptmm < sett-0.5 {
@@ -68,7 +73,7 @@ func main() {
 		}
 
 		b.ServoDuty(duty)
-		b.Text(sett, pt, ptmm, b.AmbientT(), duty)
+		b.Text(sett, disppt, ptmm, dispat, duty)
 		time.Sleep(time.Duration(1000+rand.Int63n(1000)) * time.Millisecond)
 	}
 
