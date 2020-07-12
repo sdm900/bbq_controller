@@ -126,7 +126,7 @@ func (s *Screen) Text(setpoint, temp, mm, amb, duty float32) error {
 	right(img, "SysT: "+tempformat(systemp()), 10, 56, s.fontsmall)
 	centre(img, tempformat(temp), HEIGHT-17, s.fontlarge)
 	left(img, "AveT: "+tempformat(mm), 10, HEIGHT-1, s.fontsmall)
-	right(img, "AmbT: "+tempformat(amb), 10, HEIGHT-1, s.fontsmall)
+	right(img, "BoxT: "+tempformat(amb), 10, HEIGHT-1, s.fontsmall)
 
 	return s.Render(img)
 }
