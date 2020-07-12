@@ -62,8 +62,26 @@ func (s *Screen) data(buf []byte) error {
 	return s.writei2c(DATAMODE, buf)
 }
 
+func (s *Screen) On() error {
+	e := s.cmd(DISPON)
+	if e == nil {
+		s.on = true
+	}
+
+	return e
+}
+
+func (s *Screen) Off() error {
+	e := s.cmd(DISPOFF)
+	if e == nil {
+		s.on = false
+	}
+
+	return e
+}
+
 func (s *Screen) Close() {
-	s.cmd(DISPOFF)
+	s.Off()
 	s.i2c.Close()
 }
 
@@ -122,6 +140,10 @@ func (s *Screen) GetPNG() []byte {
 
 func (s *Screen) Render(img *image.Gray) error {
 	s.SetPNG(img)
+
+	if !s.on {
+		return nil
+	}
 
 	buf := make([]byte, bytesscreen, bytesscreen)
 	for p := 0; p < numpages; p++ {

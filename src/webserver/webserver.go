@@ -22,7 +22,8 @@ func (sh *screenHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 type rootHandler struct {
-	b *bbq.BBQ
+	b      *bbq.BBQ
+	screen string
 }
 
 func (rh *rootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -34,6 +35,15 @@ func (rh *rootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		if e == nil {
 			rh.b.SetT(float32(t))
 		}
+	}
+
+	v = r.FormValue("display")
+	if v == "On" {
+		rh.b.ScreenOn()
+		rh.screen = "Off"
+	} else if v == "Off" {
+		rh.b.ScreenOff()
+		rh.screen = "On"
 	}
 
 	p := new(bytes.Buffer)
@@ -55,6 +65,12 @@ func (rh *rootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		fmt.Sprintf("%.1f", rh.b.GetT()) +
 		`" style="font-size:200%;"> <input type="submit" value="Set" style="font-size:200%;">
 </form>
+
+<form action="/" method="post">
+<label for="display" style="font-size:200%;">Display:</label> <input type="submit" name="display" value="` +
+		rh.screen +
+		`" style="font-size:200%;">
+</form>
 </body>
 </html>
 `)
@@ -66,7 +82,7 @@ func (rh *rootHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func Serve(b *bbq.BBQ) {
 	http.Handle("/png", &screenHandler{b})
-	http.Handle("/", &rootHandler{b})
+	http.Handle("/", &rootHandler{b, "Off"})
 
 	if e := http.ListenAndServe(":80", nil); e != nil {
 		outputs.Err("Can not serve the screen:", e)

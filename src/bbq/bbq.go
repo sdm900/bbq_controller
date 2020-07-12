@@ -82,6 +82,13 @@ func (b *BBQ) AmbientT() float32 {
 	return t
 }
 
+func (b *BBQ) ScreenOn() {
+	b.screen.On()
+}
+func (b *BBQ) ScreenOff() {
+	b.screen.Off()
+}
+
 func (b *BBQ) ServoDuty(d float32) {
 	if e := b.servo.Duty(d); e != nil {
 		outputs.Msg("Could not set duty of servo: ", e)

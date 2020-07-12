@@ -18,6 +18,7 @@ type Screen struct {
 	fontlarge font.Face
 	fontsmall font.Face
 	mux       sync.Mutex
+	on        bool
 }
 
 const (
@@ -87,5 +88,5 @@ func (s *Screen) init() error {
 	s.fontlarge = truetype.NewFace(flarge, &truetype.Options{65, 0, font.HintingFull, 0, 0, 0})
 	s.fontsmall = truetype.NewFace(fsmall, &truetype.Options{8, 0, font.HintingFull, 0, 0, 0})
 
-	return s.cmd(DISPON)
+	return s.On()
 }
