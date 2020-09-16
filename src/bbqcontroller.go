@@ -50,8 +50,7 @@ func main() {
 
 	var duty float32
 	duty = 50
-	mm := filter.NewMM(200, 70)
-
+	mm := filter.NewMM(100, 80)
 	mm1 := filter.NewMM(10, 60)
 	mm2 := filter.NewMM(10, 60)
 
@@ -69,20 +68,20 @@ func main() {
 	for i := 0; ; i++ {
 		pt := b.ProbeT()
 		ptmm := mm.Add(pt)
-		disppt := mm1.Add(pt)
+		curpt := mm1.Add(pt)
 		dispat := mm2.Add(b.AmbientT())
 		sett := b.GetT()
 
-		if ptmm < sett-0.5 {
+		if (curpt < ptmm+0.1) && (ptmm < sett+0.5) {
 			duty = min32(duty+0.5, 100.0)
 		}
 
-		if ptmm > sett+0.5 {
+		if (curpt > ptmm-0.1) && (ptmm > sett-0.5) {
 			duty = max32(duty-0.5, 0)
 		}
 
 		b.ServoDuty(duty)
-		b.Text(sett, disppt, ptmm, dispat, duty)
+		b.Text(sett, curpt, ptmm, dispat, duty)
 		time.Sleep(time.Duration(1000+rand.Int63n(1000)) * time.Millisecond)
 	}
 
