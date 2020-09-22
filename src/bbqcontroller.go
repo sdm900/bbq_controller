@@ -72,11 +72,11 @@ func main() {
 		dispat := mm2.Add(b.AmbientT())
 		sett := b.GetT()
 
-		if (curpt < ptmm+0.1) && (ptmm < sett+0.5) {
+		if ((curpt < ptmm+0.1) && (ptmm < sett+0.5)) || (ptmm < sett-10.0) {
 			duty = min32(duty+0.5, 100.0)
 		}
 
-		if (curpt > ptmm-0.1) && (ptmm > sett-0.5) {
+		if ((curpt > ptmm-0.1) && (ptmm > sett-0.5)) || (ptmm > sett+10.0) {
 			duty = max32(duty-0.5, 0)
 		}
 
